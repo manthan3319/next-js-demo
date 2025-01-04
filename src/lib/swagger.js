@@ -13,7 +13,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "https://next-js-demo-navy.vercel.app/", 
+        url: "http://localhost:3000", 
         description: "Local server",
       },
     ],
@@ -28,8 +28,7 @@ const swaggerOptions = {
     },
     security: [{ bearerAuth: [] }],
   },
-  // apis: ["./src/app/api/**/*.js"], 
-  apis: ["./app/api/**/*.js"],
+  apis: ["./src/app/api/**/*.js"], 
 };
 
 const swaggerSpec = swaggerJsDocs(swaggerOptions);
