@@ -13,7 +13,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "http://localhost:3000", 
+        url: "https://next-js-demo-navy.vercel.app/", 
         description: "Local server",
       },
     ],
