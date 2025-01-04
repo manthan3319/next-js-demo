@@ -1,8 +1,8 @@
 // pages/api/contractor/route.js
+import connectToDatabase from "@/lib/db";
 import { Joi } from "../../../lib/utilities/schemaValidate";
-import { addContractor } from "../../../lib/services/contractor";
 import { NextResponse } from "next/server"; 
-
+const dbService = require("@/lib/utilities/dbService");
 /**
  * @swagger
  * /api/contractor:
@@ -48,13 +48,24 @@ export async function POST(req) {
         { status: 400 }
       );
     }
+    await connectToDatabase()
+    if(body){
+        let response = {
+          email:body.email,
+          password:body.password,
+        };
 
-    const result = await addContractor(body);
+        let res = await dbService.createOneRecord("contractorModel",response);
 
-    return NextResponse.json({
-      message: "Contractor added successfully",
-      data: result,
-    });
+        console.log("res",res);
+        
+        return NextResponse.json({
+          message: "Contractor added successfully",
+          data: res,
+        });
+    }
+
+    
   } catch (error) {
     console.error("Error in POST handler:", error);
     return NextResponse.json(
@@ -63,3 +74,6 @@ export async function POST(req) {
     );
   }
 }
+
+
+
